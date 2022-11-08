@@ -42,6 +42,15 @@ class MemoDataSource {
         }
     }
 
+    fun findIdByPosition(pos : Int) : Int{
+        val currentArray = memoLiveData.value
+        if (currentArray != null){
+            val observedArray = currentArray.toMutableList()
+            return observedArray[pos].memoId
+        }
+        return 0
+    }
+
     fun getMemoList() : LiveData<Array<MemoData>> = memoLiveData
 
     companion object {

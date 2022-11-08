@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var memoDataListViewModel : MemoDataListViewModel
 
-    private var memoState : Int = 100 /** 새로운 메모 생성 시 : 1, 메모 수정 시 : 0, 메모 삭제 시 -1**/
+    private var memoState : Int ?= null /** 새로운 메모 생성 시 : 1, 메모 수정 시 : 0, 메모 삭제 시 -1**/
+    private var memoAccessId : Int = 0 /** 각 메모 Item이 가지는 고유 Id **/
     private var currentMemoPosition : Int = -1 /**  수정된 메모의 RecyclerView에서의 위치 **/
 
     private var receivedTitleText : String? = null
@@ -71,7 +72,7 @@ class MainActivity : AppCompatActivity() {
                 receivedTitleText = it.data?.getStringExtra("editedTitleText")
                 receivedMemoText = it.data?.getStringExtra("editedMemoText")
                 when(memoState){
-                    1 -> memoDataListViewModel.insertMemo(receivedTitleText, receivedMemoText)
+                    1 -> memoDataListViewModel.insertMemo(memoAccessId, receivedTitleText, receivedMemoText)
                     0 -> memoDataListViewModel.editMemo(currentMemoPosition, receivedTitleText, receivedMemoText)
                 }
             }
@@ -81,6 +82,7 @@ class MainActivity : AppCompatActivity() {
         binding.addNote.setOnClickListener {
             memoState = 1
             currentMemoPosition = 0
+            memoAccessId++
             Intent(this, MemoActivity::class.java).apply {
                 putExtra("newMemoAdded", 1)
             }.run{ getEditedMemo.launch(this) }

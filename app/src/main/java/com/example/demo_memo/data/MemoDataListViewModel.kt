@@ -8,16 +8,17 @@ class MemoDataListViewModel(private val dataSource: MemoDataSource) : ViewModel(
 
     val memoLiveData = dataSource.getMemoList()
 
-    fun insertMemo(memoTitle : String?, memoDescription: String?){
-        if (memoTitle != null && memoDescription != null){
-            val newMemo = MemoData(memoTitle, memoDescription)
+    fun insertMemo(memoId : Int?, memoTitle : String?, memoDescription: String?){
+        if (memoTitle != null && memoDescription != null && memoId != null){
+            val newMemo = MemoData(memoId, memoTitle, memoDescription)
             dataSource.addMemo(newMemo)
         }
     }
 
     fun editMemo(position : Int, memoTitle: String?, memoDescription: String?){
         if (memoTitle != null && memoDescription != null){
-            val newMemo = MemoData(memoTitle, memoDescription)
+            val currentId = dataSource.findIdByPosition(position)
+            val newMemo = MemoData(currentId, memoTitle, memoDescription)
             dataSource.editMemo(position, newMemo)
         }
     }
