@@ -64,20 +64,20 @@ class MainActivity : AppCompatActivity() {
             )
         }
 
-        /** 새로 생긴 메모 또는 편집된 메모 내용 가져오기**/
+        /** 새로 생긴 메모 또는 편집된 메모 내용 가져오기 **/
         getEditedMemo = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()) {
             if (it.resultCode == RESULT_OK) {
                 receivedTitleText = it.data?.getStringExtra("editedTitleText")
                 receivedMemoText = it.data?.getStringExtra("editedMemoText")
-            }
-            when(memoState){
-                1 -> memoDataListViewModel.insertMemo(receivedTitleText, receivedMemoText)
-                0 -> memoDataListViewModel.editMemo(currentMemoPosition, receivedTitleText, receivedMemoText)
+                when(memoState){
+                    1 -> memoDataListViewModel.insertMemo(receivedTitleText, receivedMemoText)
+                    0 -> memoDataListViewModel.editMemo(currentMemoPosition, receivedTitleText, receivedMemoText)
+                }
             }
         }
 
-        /** 최초 메모 생성 시 보내는 Intent**/
+        /** 최초 메모 생성 시 보내는 Intent **/
         binding.addNote.setOnClickListener {
             memoState = 1
             currentMemoPosition = 0
