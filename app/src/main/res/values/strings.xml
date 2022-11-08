@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Demo_Memo</string>
+    <string name="simple_memo">MiniNotes</string>
+    <string name="add_note">Add a Note</string>
+
+    <string name="RetainOrReset">작업 내용을 유지하시겠습니까?</string>
+    <string name="Positive">네</string>
+    <string name="Negative">아니오</string>
+    <string name="title">Title</string>
+
+</resources>
