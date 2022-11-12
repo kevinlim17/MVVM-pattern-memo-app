@@ -1,10 +1,10 @@
 # MVVM_Pattern_MemoApp
 MVVM 아키텍처 패턴을 적용한 안드로이드 간이 메모 애플리케이션 (Kotlin)
 
-##Overview
+## Overview
 <img width="1013" alt="image" src="https://user-images.githubusercontent.com/86971052/201022716-e9ffb735-cbc5-47e1-9b69-5c7380f14f41.png">
 
-###**애플리케이션 구동 과정**
+### **애플리케이션 구동 과정**
 >**1. MainActivity에서 CustomMemoAdapter(ListAdapter) Instance 생성**
 > 
 >**2. MainActivity에서 MemoActivity로 이동 (registerForActivityResult.launch)**
@@ -23,7 +23,7 @@ MVVM 아키텍처 패턴을 적용한 안드로이드 간이 메모 애플리케
 > 
 >**Special. 메모 아이템을 길게 누르면(setOnItemLongClickListener) 메모 데이터 삭제**
 
-##🟡 DataSource : Model
+## 🟡 DataSource : Model
 >
 > ~~~kotlin
 > class MemoDataSource {
@@ -39,7 +39,7 @@ MVVM 아키텍처 패턴을 적용한 안드로이드 간이 메모 애플리케
 > }
 > ~~~
 
-##🟣 ViewModel
+## 🟣 ViewModel
 >
 > ~~~kotlin
 > class MemoDataListViewModel(private val dataSource: MemoDataSource) : ViewModel(){
@@ -51,8 +51,8 @@ MVVM 아키텍처 패턴을 적용한 안드로이드 간이 메모 애플리케
 > }
 > ~~~
 
-##🔴 Activities : View
-###🗄 MainActivity.kt
+## 🔴 Activities : View
+### 🗄 MainActivity.kt
 >
 > ~~~kotlin
 > class MainActivity : AppCompatActivity() {
@@ -98,6 +98,6 @@ MVVM 아키텍처 패턴을 적용한 안드로이드 간이 메모 애플리케
 > ~~~
 > 
 
-##🟢 Adapter
+## 🟢 Adapter
 > **Update Soon**
 
