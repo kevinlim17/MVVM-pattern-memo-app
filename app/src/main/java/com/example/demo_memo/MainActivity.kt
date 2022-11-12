@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         }
         **/
 
-        recyclerAdapter = CustomMemoAdapter(emptyList<MemoData>().toTypedArray())
+        recyclerAdapter = CustomMemoAdapter()
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity, RecyclerView.VERTICAL, false)
             adapter = recyclerAdapter
@@ -58,11 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         memoDataListViewModel.memoLiveData.observe(this) {
-            (binding.recyclerView.adapter as CustomMemoAdapter).setMemoData(
-                it,
-                memoState,
-                currentMemoPosition
-            )
+            (binding.recyclerView.adapter as CustomMemoAdapter).submitList(it.toMutableList())
         }
 
         /** 새로 생긴 메모 또는 편집된 메모 내용 가져오기 **/
