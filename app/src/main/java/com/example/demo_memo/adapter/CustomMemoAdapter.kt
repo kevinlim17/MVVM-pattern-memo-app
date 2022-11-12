@@ -3,13 +3,13 @@ package com.example.demo_memo.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.demo_memo.R
 import com.example.demo_memo.data.MemoData
 import com.example.demo_memo.databinding.RecyclerViewItemBinding
 
-class CustomMemoAdapter(private var memoDataSet: Array<MemoData>) : RecyclerView.Adapter<CustomMemoAdapter.ViewHolder>(){
+class CustomMemoAdapter : ListAdapter<MemoData, CustomMemoAdapter.ViewHolder>(DiffUtilCallback){
 
     interface OnItemClickListener{
         fun onItemClick(v : View, data : MemoData, position: Int)
@@ -62,24 +62,23 @@ class CustomMemoAdapter(private var memoDataSet: Array<MemoData>) : RecyclerView
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(memoDataSet[position])
-        holder.setIsRecyclable(false)
+        holder.bind(getItem(position))
+        holder.setIsRecyclable(true)
     }
 
-    override fun getItemCount() = memoDataSet.size
-
-    fun setMemoData(newDataSet: Array<MemoData>, state : Int, position: Int){
+    /**SubmitList(MutableList<T> list) Method로 대체**/
+    /**
+    fun updateMemoData(newDataSet: Array<MemoData>, state : Int?, position: Int){
         memoDataSet.toMutableList().clear()
         memoDataSet = newDataSet
 
         notifyDataSetChanged()
-        /**
         when (state) {
             -1 -> notifyItemRemoved(position)
             0 -> notifyItemChanged(position)
             1 -> notifyItemInserted(position)
         }
-        **/
     }
+    **/
 
 }
