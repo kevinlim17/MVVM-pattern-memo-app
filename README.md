@@ -64,10 +64,12 @@ MVVM 아키텍처 패턴을 적용한 안드로이드 간이 메모 애플리케
 >               adapter = recyclerAdapter       
 >               addItemDecoration(VerticalItemDecorator(5))
 >           }
+> 
 >           /** Observe LiveData and Update Adapter **/
 >           memoDataListViewModel.memoLiveData.observe(this) {
 >               (binding.recyclerView.adapter as CustomMemoAdapter).submitList(it.toMutableList())
 >           }
+> 
 >           /** Access LiveData via MemoDataListViewModel **/
 >           getEditedMemo = registerForActivityResult(
 >           ActivityResultContracts.StartActivityForResult()) {
@@ -79,6 +81,7 @@ MVVM 아키텍처 패턴을 적용한 안드로이드 간이 메모 애플리케
 >                        0 -> memoDataListViewModel.editMemo(currentMemoPosition, receivedTitleText, receivedMemoText)
 >                   }
 >           }
+> 
 >           /** Delete MemoData **/
 >           recyclerAdapter.setOnItemLongClickListener(object : CustomMemoAdapter.OnItemLongClickListener {
 >                   override fun onItemLongClick(v: View, data: MemoData, position: Int): Boolean {
@@ -114,12 +117,14 @@ MVVM 아키텍처 패턴을 적용한 안드로이드 간이 메모 애플리케
 >               }               
 >
 >       }
+> 
 >       /** viewType 형태의 아이템 뷰를 위한 뷰홀더 객체 생성 **/
 >       override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 >               val view = LayoutInflater.from(parent.context)
 >                   .inflate(R.layout.recycler_view_item, parent, false)
 >               return ViewHolder(RecyclerViewItemBinding.bind(view))
 >        }
+> 
 >       /** position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시 **/
 >       override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 >               holder.bind(getItem(position))
