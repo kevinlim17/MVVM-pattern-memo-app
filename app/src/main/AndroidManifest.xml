@@ -4,6 +4,7 @@
     package="com.example.demo_memo">
 
     <application
+        android:name=".application.MemoApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
