@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.demo_memo.R
-import com.example.demo_memo.data.MemoData
+import com.example.demo_memo.database.MemoInfo
 import com.example.demo_memo.databinding.RecyclerViewItemBinding
 
-class CustomMemoAdapter : ListAdapter<MemoData, CustomMemoAdapter.ViewHolder>(DiffUtilCallback){
+class CustomMemoAdapter : ListAdapter<MemoInfo, CustomMemoAdapter.ViewHolder>(DiffUtilCallback){
 
     interface OnItemClickListener{
-        fun onItemClick(v : View, data : MemoData, position: Int)
+        fun onItemClick(v : View, data : MemoInfo, position: Int)
     }
     interface OnItemLongClickListener {
-        fun onItemLongClick(v : View, data : MemoData, position: Int) : Boolean
+        fun onItemLongClick(v : View, data : MemoInfo, position: Int) : Boolean
     }
 
     private var listener : OnItemClickListener? = null
@@ -30,16 +30,16 @@ class CustomMemoAdapter : ListAdapter<MemoData, CustomMemoAdapter.ViewHolder>(Di
 
     inner class ViewHolder(private val binding: RecyclerViewItemBinding) : RecyclerView.ViewHolder(binding.root){
 
-        fun bind(memoData : MemoData){
-            binding.previewTitle.text = memoData.memoTitle
-            binding.previewText.text = memoData.memoText
+        fun bind(memoInfo : MemoInfo){
+            binding.previewTitle.text = memoInfo.title
+            binding.previewText.text = memoInfo.text
 
             if (adapterPosition != RecyclerView.NO_POSITION) {
                 binding.memoPreview.setOnClickListener {
-                    listener?.onItemClick(it, memoData, adapterPosition)
+                    listener?.onItemClick(it, memoInfo, adapterPosition)
                 }
                 binding.memoPreview.setOnLongClickListener {
-                    longClickListener!!.onItemLongClick(it, memoData, adapterPosition)
+                    longClickListener!!.onItemLongClick(it, memoInfo, adapterPosition)
                 }
                 /**
                 val item = memoDataSet[]
