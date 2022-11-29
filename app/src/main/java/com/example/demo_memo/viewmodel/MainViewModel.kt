@@ -7,7 +7,7 @@ import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: MemoInfoRepository) : ViewModel() {
 
-    private val memoInfoData : LiveData<List<MemoInfo>> = repository.allMemoInfo.asLiveData()
+    val memoInfoData : LiveData<List<MemoInfo>> = repository.allMemoInfo.asLiveData()
 
     fun insertMemo(updatedMemoInfo : MemoInfo) = viewModelScope.launch {
         repository.insertMemo(updatedMemoInfo)
